@@ -24,7 +24,7 @@ class GrafoWikipedia:
         return len(self.articulos)
 
     def cantidad_enlaces(self):
-        return sum(articulos.grado_salida() for articulo in self.articulos.values())
+        return sum(articulo.grado_salida() for articulo in self.articulos.values())
 #sort
     def top_por_grado_entrada(self, cantidad=10):
         lista = list(self.articulos.values())
@@ -165,7 +165,7 @@ class GrafoWikipedia:
                 aporte = puntajes[id_articulo] / articulo.grado_salida()
 
                 for vecino in articulo.enlaces_salida:
-                    #TODO, COMPLETAR LA LINEA FALTANTE
+                    nuevos_puntajes[vecino] += aporte
 
             puntajes = nuevos_puntajes
 

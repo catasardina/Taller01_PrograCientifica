@@ -4,7 +4,7 @@ from utilidades.reporte_basico import ReporteBasicoWikipedia
 
 def main():
     cargador = CargadorWikipedia()
-    grafo = cargador.cargar_grafo()
+    grafo = cargador.cargar_grafo(limite=5000)
     reporte = ReporteBasicoWikipedia()
     archivos_reporte = reporte.generar(grafo)
     reporte.imprimir_en_consola(grafo)

@@ -49,10 +49,27 @@ class CargadorWikipedia:
                     fila = int(partes[0])
                     columna = int(partes[1])
                     yield fila, columna
-
-    def cargar_grafo(self):
+#cambiar limite despues porque si no se peta
+    def cargar_grafo(self,limite = 5000, limite_lineas=50000):
         grafo = GrafoWikipedia()
-
-        #TODO
-
+        print("CArgando articulos")
+        nombres = self.cargar_nombres_articulos()
+        nodos_c= 0
+        for id_articulo, nombre in nombres.items():
+            if nodos_c >= limite:
+                break
+            grafo.agregar_articulo(id_articulo, nombre)
+            nodos_c +=1
+        print("Cargando enlaces")
+        ruta_enlaces = self.ruta_dataset /"wiki-topcats.mtx"
+        enlaces= 0
+        lineas=0
+        for id_origen, id_destino in self._leer_matriz_market(ruta_enlaces):
+            lineas+=1
+            if lineas > limite_lineas:
+                break
+            if grafo.obtener_articulo(id_origen) is not None and grafo.obtener_articulo(id_destino) is not None:
+                grafo.agregar_enlace(id_origen,id_destino)
+                enlaces+=1
+            print(f'Subconjunto: {nodos_c} articulos, {enlaces} enlaces cargados')
         return grafo
