@@ -50,26 +50,48 @@ class CargadorWikipedia:
                     columna = int(partes[1])
                     yield fila, columna
 #cambiar limite despues porque si no se peta
-    def cargar_grafo(self,limite = 5000, limite_lineas=50000):
+    def cargar_relaciones_articulo_categoria(self, grafo, categorias, limite_lineas=None):
+        ruta_categorias = self.ruta_dataset / "wiki-topcats_Categories.mtx"
+        lineas = 0
+
+        for id_articulo, id_categoria in self._leer_matriz_market(ruta_categorias):
+            lineas += 1
+            if limite_lineas is not None and lineas > limite_lineas:
+                break
+
+            if grafo.obtener_articulo(id_articulo) is not None and id_categoria in categorias:
+                grafo.agregar_categoria_articulo(id_articulo, id_categoria, categorias[id_categoria])
+
+        return grafo
+
+    def cargar_grafo(self, limite = 5000, limite_lineas=50000):
         grafo = GrafoWikipedia()
-        print("CArgando articulos")
+        print("Cargando articulos")
         nombres = self.cargar_nombres_articulos()
+        categorias = self.cargar_nombres_categorias()
         nodos_c= 0
         for id_articulo, nombre in nombres.items():
             if nodos_c >= limite:
                 break
             grafo.agregar_articulo(id_articulo, nombre)
             nodos_c +=1
+
         print("Cargando enlaces")
-        ruta_enlaces = self.ruta_dataset /"wiki-topcats.mtx"
-        enlaces= 0
-        lineas=0
+        ruta_enlaces = self.ruta_dataset / "wiki-topcats.mtx"
+        enlaces = 0
+        lineas = 0
         for id_origen, id_destino in self._leer_matriz_market(ruta_enlaces):
-            lineas+=1
+            lineas += 1
             if lineas > limite_lineas:
                 break
             if grafo.obtener_articulo(id_origen) is not None and grafo.obtener_articulo(id_destino) is not None:
-                grafo.agregar_enlace(id_origen,id_destino)
-                enlaces+=1
-            print(f'Subconjunto: {nodos_c} articulos, {enlaces} enlaces cargados')
+                grafo.agregar_enlace(id_origen, id_destino)
+                enlaces += 1
+
+        print(f'Subconjunto: {nodos_c} articulos, {enlaces} enlaces cargados')
+
+        print("Cargando categorias de articulos")
+        self.cargar_relaciones_articulo_categoria(grafo, categorias)
+        print(f'Categorias cargadas: {grafo.cantidad_categorias()}')
+
         return grafo

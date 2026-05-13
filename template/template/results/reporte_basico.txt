@@ -1,0 +1,18 @@
+Reporte basico de Wikipedia
+
+Cantidad de articulos: 5000
+Cantidad de enlaces: 2418
+
+Top 5 por grado de entrada:
+1. Buprestidae -> 548
+2. Buprestoidea -> 536
+3. Adrian Monk -> 17
+4. Natalie Teeger -> 16
+5. Randy Disher -> 15
+
+Top 5 por grado de salida:
+1. Agrilinae -> 199
+2. Buprestinae -> 137
+3. Chrysochroinae -> 108
+4. Polycestinae -> 83
+5. Buprestidae -> 50
