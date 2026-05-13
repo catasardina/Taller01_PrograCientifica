@@ -1,0 +1,25 @@
+======REPORTE DE PAGERANK Y CATEGORIAS======
+
+Top 10 articulos por PageRank:
+1. Buprestidae (Score: 0.09188532)
+2. Buprestoidea (Score: 0.07637282)
+3. Schizopodidae (Score: 0.05148061)
+4. American Beetles (Score: 0.01431269)
+5. Michael C. Thomas (Score: 0.01295644)
+6. Schizopus (Score: 0.00997787)
+7. Electrapate (Score: 0.00997787)
+8. Dystaxia (genus) (Score: 0.00997787)
+9. Glyptoscelimorpha (Score: 0.00997787)
+10. Ross H. Arnett, Jr. (Score: 0.00876243)
+
+Top 10 categorias por PageRank promedio:
+1. Reference_works - Promedio PR: 0.01431269 (1 articulos)
+2. 2002_books - Promedio PR: 0.01431269 (1 articulos)
+3. University_of_Florida_alumni - Promedio PR: 0.01295644 (1 articulos)
+4. The_Catholic_University_of_America_faculty - Promedio PR: 0.00876243 (1 articulos)
+5. Purdue_University_faculty - Promedio PR: 0.00876243 (1 articulos)
+6. People_from_Miami,_Florida - Promedio PR: 0.00649322 (2 articulos)
+7. American_rock_bass_guitarists - Promedio PR: 0.00289800 (1 articulos)
+8. Glam_metal_musical_groups - Promedio PR: 0.00275276 (2 articulos)
+9. Musical_trios - Promedio PR: 0.00275276 (2 articulos)
+10. Insect_families - Promedio PR: 0.00245860 (23 articulos)

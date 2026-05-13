@@ -87,3 +87,26 @@ class ReporteBasicoWikipedia:
 
         for posicion, item in enumerate(items, start=1):
             print(f"{posicion}. {item['nombre']} -> {item['valor']}")
+
+    def exportar_pagerank_y_categorias(self, grafo, ranking_ordenado, pr_por_cat):
+        self.carpeta_resultados.mkdir(parents=True, exist_ok=True)
+        ruta_texto = self.carpeta_resultados / "reporte_pagerank.txt"
+        
+        lineas = [
+            "======REPORTE DE PAGERANK Y CATEGORIAS======",
+            "",
+            "Top 10 articulos por PageRank:"
+        ]
+        for i in range(min(10, len(ranking_ordenado))):
+            id_art, puntaje = ranking_ordenado[i]
+            articulo = grafo.obtener_articulo(id_art)
+            nombre = articulo.nombre if articulo else f"ID: {id_art}"
+            lineas.append(f"{i+1}. {nombre} (Score: {puntaje:.8f})")
+        lineas.append("")
+        lineas.append("Top 10 categorias por PageRank promedio:")
+        
+        for i, (categoria, promedio, cantidad) in enumerate(pr_por_cat[:10], start=1):
+            lineas.append(f"{i}. {categoria} - Promedio PR: {promedio:.8f} ({cantidad} articulos)")
+
+        ruta_texto.write_text("\n".join(lineas) + "\n", encoding="utf-8")
+        return ruta_texto

@@ -95,6 +95,26 @@ def main():
             articulo = grafo.obtener_articulo(id_art)
             nombre = articulo.nombre if articulo else f"Id: {id_art}"
             print(f"{i}) {nombre} - Score: {pr:.8f}")
+    print("\n--- Búsqueda de Camino Simple (BFS) ---")
+    lista_ids = list(grafo.articulos.keys())
+    if len(lista_ids) >= 2:
+        id_origen = lista_ids[0]  
+        id_destino = lista_ids[-1]
+        camino = grafo.encontrar_camino_simple(id_origen, id_destino)
+        nombre_origen = grafo.obtener_articulo(id_origen).nombre
+        nombre_destino = grafo.obtener_articulo(id_destino).nombre
+        
+        print(f"Buscando camino desde '{nombre_origen}' hasta '{nombre_destino}'...")
+        if camino:
+            nombres_camino = [grafo.obtener_articulo(nodo).nombre for nodo in camino]
+            print(f"¡Camino encontrado! ({len(camino)} saltos):")
+            print(" -> ".join(nombres_camino))
+        else:
+            print("No existe un camino directo entre estos dos artículos en este subconjunto.")
 
+    print("\n--- Exportando reportes ---")
+    ruta_pr = reporte.exportar_pagerank_y_categorias(grafo, rk_ordenado, pr_por_cat)
+    print(f"Reporte de PageRank guardado exitosamente en: {ruta_pr}")
+    
 if __name__ == "__main__":
     main()
