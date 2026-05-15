@@ -63,9 +63,6 @@ def main():
     print(archivos_reporte["texto"])
 
     print()
-    print("Siguientes pasos sugeridos:")
-    print("BFS y DFS completados.")
-    print("Implementar PageRank y exportar resultados.")
     print("-------------PageRank----------")
     resultados_pr = grafo.pagerank(iteraciones=20, damping=0.85)
     rk_ordenado = sorted(resultados_pr.items(), key=lambda x: x[1], reverse=True)
